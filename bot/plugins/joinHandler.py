@@ -87,14 +87,14 @@ async def sendMessage(update: types.ChatJoinRequest):
     try:
         if settings["var"]["type"] == "text":
             await bot.send_message(
-                update.chat.id,
+                update.from_user.id,
                 text=teks,
                 reply_markup=button,
                 disable_web_page_preview=True,
             )
         else:
             await bot.send_cached_media(
-                update.chat.id,
+                update.from_user.id,
                 file_id=settings["var"]["file_id"],
                 caption=teks,
                 reply_markup=button,
@@ -121,7 +121,7 @@ async def handleRequests(bot: Bot, req: types.ChatJoinRequest):
                 scheduler.add_job(
                     acceptRequest,
                     "date",
-                    [req.from_user.id, req.chat.id],
+                    [req],
                     id=f"{req.chat.id}:{req.from_user.id}",
                     run_date=datetime.now() + timedelta(seconds=delay),
                     max_instances=5000000,
