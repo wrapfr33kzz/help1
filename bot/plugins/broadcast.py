@@ -194,7 +194,7 @@ async def cancel_broadcast(_: Bot, query: types.CallbackQuery):
     Cache.CANCEL_BROADCAST = True
 
 
-@Bot.on_message(filters.command("stats") & filters.user(626664225))  # type: ignore
+@Bot.on_message(filters.command("stats") & filters.user(Config.SUDO_USERS))  # type: ignore
 async def stats_users(_: Bot, msg: types.Message):
     count = await usersDB.total_users_count()
     await msg.reply(f"Total Users {count}")
