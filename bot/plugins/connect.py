@@ -269,16 +269,15 @@ async def chatCallBack(bot: Bot, query: types.CallbackQuery):
         settings = await getSettings(int(chatID))
         _msg = await query.message.reply(
             "send new welcome message to be sent when people requests to join this channel."
-            f"\n\nCurrent Message: {settings['autoAccept']['var']}"
         )
         try:
             newWelcome = await bot.wait_for_message(query.message.chat.id, timeout=600)
         except asyncio.TimeoutError:
+            await _msg.edit("Exceeded maximum time")
             return
         text, msg_type, file_id = await get_message_data(newWelcome)
-        newWelcome = await get_input(_msg)
-        if not newWelcome:
-            return
+        # newWelcome = await get_input(_msg)
+
         settings_ = await updateSettings(
             int(chatID), main, {"type": msg_type, "text": text, "file_id": file_id}, sub
         )
