@@ -31,7 +31,7 @@ scheduler = AsyncIOScheduler(
             collection="asyncJobs",
         )
     },
-    timezone=str(tzlocal.get_localzone()),
+    timezone="Etc/UTC",
 )
 
 
