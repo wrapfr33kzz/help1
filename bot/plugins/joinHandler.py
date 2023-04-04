@@ -83,7 +83,7 @@ async def sendMessage(update: types.ChatJoinRequest):
         teks = random.choice(filter_reply)
     else:
         teks = tek
-    teks += "\n\n**Send /start to know more**"
+    teks += "\n\n**Send /start to join chat**"
     try:
         if settings["var"]["type"] == "text":
             await bot.send_message(
@@ -136,7 +136,7 @@ async def handleRequests(bot: Bot, req: types.ChatJoinRequest):
             await bot.send_message(
                 req.from_user.id,
                 f"Thankyou for sending request to join chat [{req.chat.title}]"
-                "\n\nYour request will be approved soon! \nHit /start to know more!",
+                "\n\nYour request will be approved soon! \nHit /start to join chat!",
             )
         except Exception as e:
             log.exception(e)
